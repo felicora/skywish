@@ -272,7 +272,12 @@ let cur=null;function openCard(w){cur=w;$("#ctext").textContent=w.text;$("#cdate
 $("#cclose").onclick=()=>{$("#card").classList.remove("on");cur=null};
 $("#cdel").onclick=()=>{if(!cur)return;wishes=wishes.filter(w=>w.id!==cur.id);saveWishes(wishes);renderSaved();$("#card").classList.remove("on");cur=null;hint()};
 addEventListener("keydown",e=>{if(e.key==="Escape")$("#cclose").click()});
-function hint(){$("#skyhint").textContent=wishes.length?:""}
+function hint() {
+  $("#skyhint").textContent = wishes.length
+    ? `${wishes.length} ${wishes.length === 1 ? "wish" : "wishes"} glowing in your sky.`
+    : "Your wish sky is waiting for its first lantern.";
+}
+
 /* ending buttons */
 function resetLantern(){lf.className="";lf.style.cssText="";lf.removeAttribute("data-p");$("#glow").style.setProperty("--g",0);document.body.classList.remove("lit");fl.className="";fl.style.transform="";ft={x:0,y:0};litDone=false;hold=0;pressing=false;pend=null;starBoost=0}
 $("#again").onclick=()=>{resetLantern();wi.value="";wishText="";choice={color:"cream",symbol:"fu"};$("#cnt").textContent="0 / 100";$("#keep").disabled=true;go("writing")};
